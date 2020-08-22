@@ -1,5 +1,5 @@
 # cpppp
-Some Python features are implemented on C + + to make C + + easier to use. Since most of them are implemented with templates, there is almost no additional cost.
+Some Python features are implemented on C++ to make C++ easier to use. Since most of them are implemented with templates, there is almost no additional cost.
 ## Examples
 ```cpp
 #include <cpppp/cpppp>
