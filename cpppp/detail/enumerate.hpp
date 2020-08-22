@@ -67,6 +67,12 @@ public:
 		{
 			return std::tie(value);
 		}
+
+		template<class Value>
+		static auto make_tuple(const Value& value)
+		{
+			return std::tie(value);
+		}
 	};
 
 	template<class Iterator>

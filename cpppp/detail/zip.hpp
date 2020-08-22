@@ -18,7 +18,7 @@ public:
 
 	public:
 
-		const_iterator(Iterators&& iterators) :iterators(std::move(iterators))
+		const_iterator(Iterators&& iterators) :iterators(std::forward<Iterators>(iterators))
 		{
 
 		}
@@ -52,7 +52,7 @@ public:
 	{
 	public:
 
-		iterator(Iterators&& iterators) :const_iterator<Iterators>(std::move(iterators))
+		iterator(Iterators&& iterators) :const_iterator<Iterators>(std::forward<Iterators>(iterators))
 		{
 
 		}
@@ -79,28 +79,28 @@ public:
 	auto begin(void) noexcept
 	{
 		return traverse(containers, [](auto&& container) {return container.begin(); }, 
-			[](auto... args) {auto iterators = std::tuple(args...); return iterator(std::move(iterators)); },
+			[](auto... args) {return iterator(std::tuple(args...)); },
 			std::make_index_sequence<std::tuple_size<decltype(containers)>::value>());
 	}
 
 	auto begin(void) const noexcept
 	{
 		return traverse(containers, [](const auto& container) {return container.begin(); },
-			[](auto... args) {auto iterators = std::tuple(args...); return const_iterator(std::move(iterators)); },
+			[](auto... args) {return const_iterator(std::tuple(args...)); },
 			std::make_index_sequence<std::tuple_size<decltype(containers)>::value>());
 	}
 
 	auto end(void) noexcept
 	{
 		return traverse(containers, [](auto&& container) {return container.end(); },
-			[](auto... args) {auto iterators = std::tuple(args...); return iterator(std::move(iterators)); },
+			[](auto... args) {return iterator(std::tuple(args...)); },
 			std::make_index_sequence<std::tuple_size<decltype(containers)>::value>());
 	}
 
 	auto end(void) const noexcept
 	{
 		return traverse(containers, [](const auto& container) {return container.end(); },
-			[](auto... args) {auto iterators = std::tuple(args...); return const_iterator(std::move(iterators)); },
+			[](auto... args) {return const_iterator(std::tuple(args...)); },
 			std::make_index_sequence<std::tuple_size<decltype(containers)>::value>());
 	}
 
